@@ -35,33 +35,48 @@
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = { value: '' };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     //debug
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+    // alert('A name was submitted: ' + this.state.value);
+    console.log('this.state.value', this.state.value)
+    // componentDidMount() {
+    // fetch(`http://localhost:3000/intraday/${this.state.value}`)
+    //   .then(res => res.json())
+    //   .then((data) => {
+    //     this.setState({ contacts: data })
+    //   })
+    //   .catch(console.log)
+    // // }
+    console.log('calling route')
+    // const response =
+      // await axios.get(`http://localhost:3000/intraday/${this.state.value}`)
+    // console.log(response.data)
+
+
+    // event.preventDefault();
   }
 
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      {this.state.value}
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        {/* {this.state.value} */}
       </div>
     );
   }
