@@ -53,6 +53,7 @@ class NameForm extends React.Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
@@ -60,6 +61,8 @@ class NameForm extends React.Component {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      {this.state.value}
+      </div>
     );
   }
 }
