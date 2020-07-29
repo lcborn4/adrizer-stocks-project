@@ -1,0 +1,44 @@
+<mat-table [dataSource]="data" class="mat-elevation-z8">
+  <!-- Time Stamp Column -->
+  <ng-container matColumnDef="timeStamp">
+    <mat-header-cell *matHeaderCellDef> Time Stamp </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.timeStamp }} </mat-cell>
+  </ng-container>
+
+  <!-- Total Volume Column -->
+  <ng-container matColumnDef="totalVolume">
+    <mat-header-cell *matHeaderCellDef> Total Volume </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.totalVolume }} </mat-cell>
+  </ng-container>
+
+  <!-- Min Price Column -->
+  <ng-container matColumnDef="minPrice">
+    <mat-header-cell *matHeaderCellDef> Min Price </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.minPrice }} </mat-cell>
+  </ng-container>
+
+  <!-- Max Price Column -->
+  <ng-container matColumnDef="maxPrice">
+    <mat-header-cell *matHeaderCellDef> Max Price </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.maxPrice }} </mat-cell>
+  </ng-container>
+
+  <!-- Opening Price Column -->
+  <ng-container matColumnDef="openingPrice">
+    <mat-header-cell *matHeaderCellDef> Opening Price </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.openingPrice }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Closing Price Column -->
+  <ng-container matColumnDef="closingPrice">
+    <mat-header-cell *matHeaderCellDef> Closing Price </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.closingPrice }}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

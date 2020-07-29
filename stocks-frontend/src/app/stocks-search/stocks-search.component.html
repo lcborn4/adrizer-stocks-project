@@ -1,0 +1,8 @@
+<div>
+  <form name="symbolForm" [formGroup]="symbolForm" (ngSubmit)="onSubmit()">
+    Enter a Symbol:
+    <input matInput type="text" formControlName="symbol" />
+    <button type="submit">Submit</button>
+  </form>
+</div>
+<div><app-stocks-table [data]="data"></app-stocks-table></div>
