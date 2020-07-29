@@ -17,15 +17,17 @@ export class StocksSearchComponent implements OnInit {
   symbol: any;
   data: any;
 
+  Submitted: boolean = false;
+
   constructor(public stocksDataService: StocksDataService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    console.log('onSubmit')
+    this.Submitted = true;
+    console.log('onSubmit', this.Submitted)
     this.symbol = this.symbolForm.get('symbol').value;
-    console.log('onSubmit')
     console.log('symbol', this.symbol)
 
     this.getStocksData(this.symbol);
@@ -35,12 +37,18 @@ export class StocksSearchComponent implements OnInit {
     console.log('inside getStocksData')
     this.stocksDataService.getStocksData(symbol).subscribe(
       (stocksData) => {
+        this.Submitted = false;
+        console.log('after data', this.Submitted)
         let dataRecords = stocksData['Time Series (5min)'];
         console.log('data', dataRecords)
         console.log('data length', Object.keys(dataRecords).length);
         this.data = this.parseData(dataRecords);
       },
-      (err) => console.error(err))
+      (err) => {
+        console.error(err)
+
+        this.Submitted = false;
+      })
   }
 
   parseData(dataRecords) {
@@ -49,7 +57,7 @@ export class StocksSearchComponent implements OnInit {
     let data = [];
 
     Object.keys(dataRecords).forEach(element => {
-      console.log('element',element)
+      console.log('element', element)
 
       console.log(dataRecords[element]['5. volume']);
       console.log(dataRecords[element]['3. low']);
@@ -69,7 +77,7 @@ export class StocksSearchComponent implements OnInit {
       data.push(newData)
     });
 
-    console.log('returning data',data)
+    console.log('returning data', data)
 
     return data;
   }

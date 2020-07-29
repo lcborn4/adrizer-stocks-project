@@ -5,4 +5,7 @@
     <button type="submit">Submit</button>
   </form>
 </div>
-<div><app-stocks-table [data]="data"></app-stocks-table></div>
+<div *ngIf="Submitted">
+<mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!Submitted"><app-stocks-table [data]="data"></app-stocks-table></div>
