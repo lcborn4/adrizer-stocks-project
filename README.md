@@ -15,7 +15,7 @@ call the alphavantage api for stock data
 ## API Key
 - create file in src folder: my_key.json
 - ```
-    {"key": "EXAMPLE_KEY"}
+    {"key": "PASTE KEY HERE"}
 
 # to run
 - clone repo
