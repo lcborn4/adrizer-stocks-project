@@ -12,6 +12,11 @@ table
 backend code - Loopback
 call the alphavantage api for stock data
 
+## API Key
+- create file in src folder: my_key.json
+- ```
+    {"key": "EXAMPLE_KEY"}
+
 # to run
 - clone repo
 - 
