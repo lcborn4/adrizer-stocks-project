@@ -3,7 +3,9 @@ import {inject} from '@loopback/core';
 import {get, param} from '@loopback/rest';
 import {Alphavantage} from '../services/alphavantage.service';
 
-const APIKEY = process.env.APIKEY ? process.env.APIKEY : '9G14MJPU4UE0B6G9'
+import data from "../my_key.json";
+
+const APIKEY = process.env.APIKEY ? process.env.APIKEY : data.key
 
 // const AlphavantageServiceInterface = 'Alphavantage'
 export class IntradayController {
