@@ -2,11 +2,6 @@
 
 [![LoopBack](https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png)](http://loopback.io/)
 
-# stocks-frontend
-
-frontend code - Angular
-Angular Material
-table
 
 # src
 backend code - Loopback
@@ -30,8 +25,15 @@ npm install
 npm start
 ```
 ## React Frontend
+### folder: stocks-frontend-react
+
 ```
-cd stocks-frontend
+cd stocks-frontend-react
 npm install
 ng serve
 ```
+
+# stocks-frontend-angular
+frontend code - Angular
+Angular Material
+table
