@@ -4,6 +4,7 @@
 
 
 # stocks-frontend
+
 frontend code - Angular
 Angular Material
 table
@@ -13,22 +14,25 @@ backend code - Loopback
 call the alphavantage api for stock data
 
 ## API Key
-- create file in src folder: my_key.json
-- ```
-    {"key": "PASTE KEY HERE"}
+create file in src folder: my_key.json
+ ```
+  {"key": "PASTE KEY HERE"}
+ ```
 
-# to run
-- clone repo
-- 
-## backend
-- loopback backend api
-- npm install
-- npm start
-
-## frontend
-- 2nd terminal
-- cd stocks-frontend
-- npm install
-- ng serve
-
-
+## Usage
+```
+git clone https://github.com/lcborn4/adrizer-stocks-project.git
+cd adrizer-stocks-project
+```
+## Loopback Proxy API
+```
+loopback backend api
+npm install
+npm start
+```
+## React Frontend
+```
+cd stocks-frontend
+npm install
+ng serve
+```
