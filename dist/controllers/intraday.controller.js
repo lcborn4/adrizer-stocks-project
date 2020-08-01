@@ -5,7 +5,8 @@ const tslib_1 = require("tslib");
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const core_1 = require("@loopback/core");
 const rest_1 = require("@loopback/rest");
-const APIKEY = process.env.APIKEY ? process.env.APIKEY : '9G14MJPU4UE0B6G9';
+const my_key_json_1 = tslib_1.__importDefault(require("../my_key.json"));
+const APIKEY = process.env.APIKEY ? process.env.APIKEY : my_key_json_1.default.key;
 // const AlphavantageServiceInterface = 'Alphavantage'
 let IntradayController = class IntradayController {
     constructor(alphavantage) {

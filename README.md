@@ -19,21 +19,35 @@ git clone https://github.com/lcborn4/adrizer-stocks-project.git
 cd adrizer-stocks-project
 ```
 ## Loopback Proxy API
+PORT 3000
 ```
 loopback backend api
 npm install
 npm start
 ```
 ## React Frontend
-### folder: stocks-frontend-react
+### Folder: stocks-frontend-react
+PORT 8000
 
+To Run: 
 ```
 cd stocks-frontend-react
 npm install
-ng serve
+npm start
 ```
 
-# stocks-frontend-angular
+## Angular Frontend
+### Folder: stocks-frontend-angular
+PORT: 4200
+
 frontend code - Angular
-Angular Material
+
+### Angular Material
 table
+
+To Run: 
+```
+cd stocks-frontend-angular
+npm install
+ng serve
+```

@@ -1841,8 +1841,13 @@
         "signature": "69b4efd2deb75948ba2b07055cc086660c99f163e19937adb7e300bf450137c6",
         "affectsGlobalScope": false
       },
+      "./src/my_key.json": {
+        "version": "4c75879ad295f0fd39b4711ae58a5f5ec6f95f1a216fe671b6a00ae313831aae",
+        "signature": "ad9e06e72a80c950876c8e6469a8f917cba66fa53be1042988bdb2bddb1242a5",
+        "affectsGlobalScope": true
+      },
       "./src/controllers/intraday.controller.ts": {
-        "version": "882c29c5e6ef5f2b3346e70e545381b3420e694a525f46cf9e7e945a9909b9a8",
+        "version": "a016120cb0988deba8560e75c5f8ff28f994cf2b84b7b36bc6479a5b520cd6a3",
         "signature": "04e231cf6afa693c261364b465320d449acbbc6bad0cf16bce5bc2b85216310f",
         "affectsGlobalScope": false
       },
@@ -4360,6 +4365,7 @@
         "./node_modules/@loopback/rest/dist/index.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
+        "./src/my_key.json",
         "./src/services/alphavantage.service.ts"
       ],
       "./src/controllers/ping.controller.ts": [
@@ -4388,6 +4394,10 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./src/application.ts"
+      ],
+      "./src/my_key.json": [
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
       ],
       "./src/openapi-spec.ts": [
         "./node_modules/@loopback/core/dist/index.d.ts",
@@ -7229,6 +7239,7 @@
       "./src/datasources/index.ts",
       "./src/index.ts",
       "./src/migrate.ts",
+      "./src/my_key.json",
       "./src/openapi-spec.ts",
       "./src/sequence.ts",
       "./src/services/alphavantage.service.ts",
