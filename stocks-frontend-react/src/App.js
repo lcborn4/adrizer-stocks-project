@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Table from './components/table';
+// import Table from './components/table';
 import StockSearch from './components/stock-search';
 
 function App() {
@@ -21,7 +21,6 @@ function App() {
           Learn React
         </a> */}
         <StockSearch />
-        <Table />
       </header>
     </div>
   );
