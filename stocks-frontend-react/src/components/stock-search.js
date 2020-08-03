@@ -13,14 +13,24 @@ class StocksSearchComponent extends Component {
         this.state = {
             symbol: '',
             data: [],
-            loading: false
+            loading: false,
+            optionsList: []
         }
     }
 
-    changeHandler = event => {
+    changeHandler = async event => {
         this.setState({
             symbol: event.target.value
         });
+
+        const url = `http://localhost:3000/symbol/${event.target.value}`;
+        console.log('url', url)
+        const response =
+            await axios.get(url)
+        console.log(response.data.bestMatches)
+        let bestMatches = response.data.bestMatches;
+        this.parseSymbols(bestMatches)
+
     }
 
     formSubmitHandler = async () => {
@@ -73,8 +83,32 @@ class StocksSearchComponent extends Component {
         return data;
     }
 
-    render() {
+    parseSymbols(bestMatches) {
+        console.log('bestMatches', bestMatches)
 
+        //array of suggested stock symbols
+        let suggestions = [];
+        Object.keys(bestMatches).forEach(element => {
+
+            console.log('element', element)
+            console.log('bestMatches[element].region',bestMatches[element]['4. region']);
+            if (bestMatches[element]['4. region'] === 'United States') {
+                console.log('adding symbol to suggestion')
+                suggestions.push(bestMatches[element]['1. symbol'])
+            }
+
+        })
+
+        console.log('suggestions',suggestions.length)
+        this.setState({
+            optionsList: suggestions
+        });
+
+        console.log('optionsList',this.state.optionsList);
+    }
+
+    render() {
+        console.log('render')
         if (this.state.data.length > 0) {
 
             return (
@@ -83,10 +117,11 @@ class StocksSearchComponent extends Component {
                     <h1>Stocks Project</h1>
                     <div>
                         <form>
-                            Symbol:<input type="symbol"
+                            <input type="symbol"
                                 name="symbol"
                                 value={this.state.symbol}
                                 onChange={this.changeHandler}
+                                placeholder="Type in Stock Symbol"
                             />
                         </form>
                         <button onClick={this.formSubmitHandler}> Submit </button>
@@ -102,10 +137,11 @@ class StocksSearchComponent extends Component {
                     <h1>Stocks Project</h1>
                     <div>
                         <form>
-                            Symbol:<input type="symbol"
+                            <input type="symbol"
                                 name="symbol"
                                 value={this.state.symbol}
                                 onChange={this.changeHandler}
+                                placeholder="Type in Stock Symbol"
                             />
                         </form>
                         <button onClick={this.formSubmitHandler}> Submit </button>
@@ -122,15 +158,18 @@ class StocksSearchComponent extends Component {
 
         }
         else {
+
             return (
                 <div>
                     <h1>Stocks Project</h1>
                     <form>
-                        Symbol:<input type="symbol"
+                        <input type="symbol"
                             name="symbol"
                             value={this.state.symbol}
                             onChange={this.changeHandler}
+                            placeholder="Type in Stock Symbol"
                         />
+                        {this.state.optionsList}
                     </form>
                     <button onClick={this.formSubmitHandler}> Submit </button>
                 </div>

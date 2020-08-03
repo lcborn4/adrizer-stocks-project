@@ -19,6 +19,15 @@ const config = {
             "functions": {
                 "getDetails": ["symbol", "interval", "apiKey"]
             }
+        },
+        {
+            "template": {
+                "method": "GET",
+                "url": "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={symbol}&apikey={apiKey}"
+            },
+            "functions": {
+                "symbolSearch": ["symbol", "apiKey"]
+            }
         }
     ]
 };

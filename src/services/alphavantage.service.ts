@@ -9,6 +9,7 @@ export interface Alphavantage {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getDetails( symbol: string, interval: string, apiKey: string): Promise<any>;
+  symbolSearch( symbol:string, apiKey:string ): Promise<any>;
 }
 
 export class AlphavantageProvider implements Provider<Alphavantage> {

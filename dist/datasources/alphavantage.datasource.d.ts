@@ -12,15 +12,25 @@ export declare class AlphavantageDataSource extends juggler.DataSource implement
                 "content-type": string;
             };
         };
-        operations: {
+        operations: ({
             template: {
                 method: string;
                 url: string;
             };
             functions: {
                 getDetails: string[];
+                symbolSearch?: undefined;
             };
-        }[];
+        } | {
+            template: {
+                method: string;
+                url: string;
+            };
+            functions: {
+                symbolSearch: string[];
+                getDetails?: undefined;
+            };
+        })[];
     };
     constructor(dsConfig?: object);
 }
