@@ -112,7 +112,7 @@ class StocksSearchComponent extends Component {
                     </div>
 
                     <Loader
-                        type="Puff"
+                        type="TailSpin"
                         color="#00BFFF"
                         height={100}
                         width={100}
