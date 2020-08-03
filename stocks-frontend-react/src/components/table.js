@@ -17,20 +17,20 @@ class TableComponent extends Component {
 
         this.state = {
             columnDefs: [{
-                headerName: "timeStamp", field: "timeStamp"
+                headerName: "Time Stamp", field: "timeStamp"
             }, {
-                headerName: "totalVolume", field: "totalVolume"
+                headerName: "Total Volume", field: "totalVolume"
             }, {
-                headerName: "minPrice", field: "minPrice"
+                headerName: "Min Price", field: "minPrice"
             }
                 , {
-                headerName: "maxPrice", field: "maxPrice"
+                headerName: "Max Price", field: "maxPrice"
             }
                 , {
-                headerName: "openingPrice", field: "openingPrice"
+                headerName: "Opening Price", field: "openingPrice"
             }
                 , {
-                headerName: "closingPrice", field: "closingPrice"
+                headerName: "Closing Price", field: "closingPrice"
             }
             ],
             rowData: this.props.dataFromParent
