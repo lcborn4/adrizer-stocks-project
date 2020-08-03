@@ -1,23 +1,23 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
   name: 'alphavantage',
   connector: 'rest',
   baseURL: 'https://www.alphavantage.co/',
   crud: false,
-  options: {headers: {"content-type": "application/json"} },
-    "operations": [
+  options: { headers: { "content-type": "application/json" } },
+  "operations": [
     {
-    "template": {
-    "method": "GET",
-    "url": "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval={interval}&apikey={apiKey}"
-    },
-    "functions": {
-    "getDetails": ["symbol","interval","apiKey"]
+      "template": {
+        "method": "GET",
+        "url": "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval={interval}&apikey={apiKey}"
+      },
+      "functions": {
+        "getDetails": ["symbol", "interval", "apiKey"]
+      }
     }
-    }
-    ]
+  ]
 };
 
 // Observe application's life cycle to disconnect the datasource when
@@ -31,7 +31,7 @@ export class AlphavantageDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.alphavantage', {optional: true})
+    @inject('datasources.config.alphavantage', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);
