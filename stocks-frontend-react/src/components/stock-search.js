@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+
+import Loader from 'react-loader-spinner'
 import Table from './table'
 
 class StocksSearchComponent extends Component {
@@ -10,6 +13,7 @@ class StocksSearchComponent extends Component {
         this.state = {
             symbol: '',
             data: [],
+            loading: false
         }
     }
 
@@ -21,7 +25,10 @@ class StocksSearchComponent extends Component {
 
     formSubmitHandler = async () => {
         console.log(this.state.symbol);
-
+        this.setState({
+            data: [],
+            loading: true
+        });
         const url = `http://localhost:3000/intraday/${this.state.symbol}`;
         console.log('url', url)
         const response =
@@ -32,8 +39,7 @@ class StocksSearchComponent extends Component {
         // console.log('data length', Object.keys(dataRecords).length);
         // this.state.data = this.parseData(dataRecords);
         let newData = this.parseData(dataRecords);
-        this.setState({ data: newData });
-
+        this.setState({ data: newData, loading: false });
     }
 
     parseData(dataRecords) {
@@ -88,6 +94,32 @@ class StocksSearchComponent extends Component {
                     <Table symbolFromParent={this.state.symbol} dataFromParent={this.state.data} />
                 </div>
             );
+        }
+        else if (this.state.loading) {
+            return (
+
+                <div>
+                    <h1>Stocks Project</h1>
+                    <div>
+                        <form>
+                            Symbol:<input type="symbol"
+                                name="symbol"
+                                value={this.state.symbol}
+                                onChange={this.changeHandler}
+                            />
+                        </form>
+                        <button onClick={this.formSubmitHandler}> Submit </button>
+                    </div>
+
+                    <Loader
+                        type="Puff"
+                        color="#00BFFF"
+                        height={100}
+                        width={100}
+                    />
+                </div>
+            );
+
         }
         else {
             return (
