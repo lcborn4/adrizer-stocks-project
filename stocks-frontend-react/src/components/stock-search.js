@@ -85,11 +85,6 @@ class StocksSearchComponent extends Component {
                         </form>
                         <button onClick={this.formSubmitHandler}> Submit </button>
                     </div>
-                    {/* <div>
-                        Show Table
-                    </div> */}
-                    {this.state.symbol}
-                    {this.state.data.length}
                     <Table symbolFromParent={this.state.symbol} dataFromParent={this.state.data} />
                 </div>
             );

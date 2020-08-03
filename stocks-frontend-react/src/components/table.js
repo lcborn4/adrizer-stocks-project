@@ -40,13 +40,7 @@ class TableComponent extends Component {
     render() {
         return (
             <div>
-                <div>
-                    The symbol from parent is:{this.props.symbolFromParent}
-                </div>
-                {/* <div>
-                    The data from parent is:{this.props.dataFromParent}
-                </div> */}
-                <div style={{ height: '250px', width: '600px' }} className="ag-theme-alpine">
+                <div style={{ height: '1000px', width: '1000px' }} className="ag-theme-alpine">
                     <AgGridReact
                         columnDefs={this.state.columnDefs}
                         rowData={this.props.dataFromParent}>
