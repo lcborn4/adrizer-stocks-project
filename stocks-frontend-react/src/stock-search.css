@@ -1,0 +1,49 @@
+.search {
+  width: 30rem;
+  margin: 10rem auto 2rem auto;
+  text-align: right;
+  position: relative;
+}
+.search-box {
+  border: 4px solid transparent;
+  border-radius: 2px;
+  font-size: 2rem;
+  width: 100%;
+  padding: 1rem;
+  transition: width 0.3s;
+}
+
+ul.options {
+    display: block;
+    list-style: none;
+    width: 30rem;
+    transition: width 0.3s;
+    margin: auto;
+    position: relative;
+  }
+  
+  ul.options li {
+    display: block;
+    background: white;
+    color:black;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1.2rem;
+    width: 100%;
+    border-radius: 2px;
+  }
+  ul.options li:hover {
+    font-weight: bold;
+    color:black;
+    cursor: pointer;
+    transition: 0.3s all;
+  }
+  
+  ul.options li.option-active {
+    background: whitesmoke;
+    font-size: 1.5rem;
+    color: black;
+  }
+  .no-options {
+    color: white;
+  }

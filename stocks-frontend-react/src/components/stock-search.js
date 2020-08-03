@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+
 import axios from 'axios'
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+
+import '../stock-search.css'
 
 import Loader from 'react-loader-spinner'
 import Table from './table'
@@ -19,17 +22,38 @@ class StocksSearchComponent extends Component {
     }
 
     changeHandler = async event => {
-        this.setState({
-            symbol: event.target.value
-        });
 
-        const url = `http://localhost:3000/symbol/${event.target.value}`;
-        console.log('url', url)
-        const response =
-            await axios.get(url)
-        console.log(response.data.bestMatches)
-        let bestMatches = response.data.bestMatches;
-        this.parseSymbols(bestMatches)
+        if (event.target.value !== '') {
+
+            this.setState({
+                symbol: event.target.value
+            });
+
+            const url = `http://localhost:3000/symbol/${event.target.value}`;
+            const response =
+                await axios.get(url)
+            let bestMatches = response.data.bestMatches;
+            this.parseSymbols(bestMatches)
+        }
+
+    }
+
+    onClick = async event => {
+        console.log('event.target.value', event.target.innerText)
+
+        this.setState({
+            symbol: event.target.innerText,
+            data: [],
+            loading: true
+        }, async () => {
+            console.log('this.state.symbol', this.state.symbol)
+            const url = `http://localhost:3000/intraday/${this.state.symbol}`;
+            const response =
+                await axios.get(url)
+            let dataRecords = response.data['Time Series (5min)'];
+            let newData = this.parseData(dataRecords);
+            this.setState({ data: newData, loading: false, optionsList: [] });
+        })
 
     }
 
@@ -40,16 +64,11 @@ class StocksSearchComponent extends Component {
             loading: true
         });
         const url = `http://localhost:3000/intraday/${this.state.symbol}`;
-        console.log('url', url)
         const response =
             await axios.get(url)
-        console.log(response.data)
         let dataRecords = response.data['Time Series (5min)'];
-        // console.log('data', dataRecords)
-        // console.log('data length', Object.keys(dataRecords).length);
-        // this.state.data = this.parseData(dataRecords);
         let newData = this.parseData(dataRecords);
-        this.setState({ data: newData, loading: false });
+        this.setState({ data: newData, loading: false, optionsList: [] });
     }
 
     parseData(dataRecords) {
@@ -58,13 +77,6 @@ class StocksSearchComponent extends Component {
         let data = [];
 
         Object.keys(dataRecords).forEach(element => {
-            // console.log('element', element)
-
-            // console.log(dataRecords[element]['5. volume']);
-            // console.log(dataRecords[element]['3. low']);
-            // console.log(dataRecords[element]['2. high']);
-            // console.log(dataRecords[element]['1. open']);
-            // console.log(dataRecords[element]['4. close']);
 
             let newData = {
                 timeStamp: element,
@@ -88,28 +100,36 @@ class StocksSearchComponent extends Component {
 
         //array of suggested stock symbols
         let suggestions = [];
-        Object.keys(bestMatches).forEach(element => {
-
-            console.log('element', element)
-            console.log('bestMatches[element].region',bestMatches[element]['4. region']);
+        Object.keys(bestMatches).forEach((element, index) => {
             if (bestMatches[element]['4. region'] === 'United States') {
-                console.log('adding symbol to suggestion')
-                suggestions.push(bestMatches[element]['1. symbol'])
+                suggestions.push({ key: index, symbol: bestMatches[element]['1. symbol'] })
             }
 
         })
 
-        console.log('suggestions',suggestions.length)
         this.setState({
             optionsList: suggestions
         });
 
-        console.log('optionsList',this.state.optionsList);
     }
 
     render() {
-        console.log('render')
         if (this.state.data.length > 0) {
+
+            let optionList
+            if (this.state.optionsList.length > 0) {
+                optionList = (
+                    <ul className="options">
+                        {this.state.optionsList.map((option, i) => {
+                            return <li key={option.symbol} onClick={this.onClick}>{option.symbol} </li>
+                        })}
+                    </ul>
+                )
+            }
+            else if (this.state.symbol !== '') {
+                optionList = (<p>No Options</p>)
+            }
+
 
             return (
 
@@ -117,12 +137,14 @@ class StocksSearchComponent extends Component {
                     <h1>Stocks Project</h1>
                     <div>
                         <form>
-                            <input type="symbol"
+                            <input type="text"
+                                className="search-box"
                                 name="symbol"
                                 value={this.state.symbol}
                                 onChange={this.changeHandler}
                                 placeholder="Type in Stock Symbol"
                             />
+                            {optionList}
                         </form>
                         <button onClick={this.formSubmitHandler}> Submit </button>
                     </div>
@@ -137,7 +159,8 @@ class StocksSearchComponent extends Component {
                     <h1>Stocks Project</h1>
                     <div>
                         <form>
-                            <input type="symbol"
+                            <input type="text"
+                                className="search-box"
                                 name="symbol"
                                 value={this.state.symbol}
                                 onChange={this.changeHandler}
@@ -159,19 +182,36 @@ class StocksSearchComponent extends Component {
         }
         else {
 
+            let optionList
+            if (this.state.optionsList.length > 0) {
+                optionList = (
+                    <ul className="options">
+                        {this.state.optionsList.map((option, i) => {
+                            return <li key={option.symbol} onClick={this.onClick}>{option.symbol} </li>
+                        })}
+                    </ul>
+                )
+            }
+            else if (this.state.symbol !== '') {
+                optionList = (<p>No Options</p>)
+            }
+
             return (
                 <div>
                     <h1>Stocks Project</h1>
-                    <form>
-                        <input type="symbol"
-                            name="symbol"
-                            value={this.state.symbol}
-                            onChange={this.changeHandler}
-                            placeholder="Type in Stock Symbol"
-                        />
-                        {this.state.optionsList}
-                    </form>
-                    <button onClick={this.formSubmitHandler}> Submit </button>
+                    <div className="search">
+                        <form>
+                            <input type="text"
+                                className="search-box"
+                                name="symbol"
+                                value={this.state.symbol}
+                                onChange={this.changeHandler}
+                                placeholder="Type in Stock Symbol"
+                            />
+                            {optionList}
+                        </form>
+                        <button onClick={this.formSubmitHandler}> Submit </button>
+                    </div>
                 </div>
             )
         }
